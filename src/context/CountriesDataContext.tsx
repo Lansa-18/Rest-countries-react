@@ -7,12 +7,10 @@ interface ContextProp {
   inputValue: string;
   isRotated: boolean;
   filteredCountries: countriesObj[];
-  // loadingState: string;
   updateInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchCountries: (query: string) => void;
   toggleRotate: () => void;
   filterCountries: (region: string) => void;
-  // setLoadingState: (state: string) => void;
 }
 
 export interface countriesObj {
@@ -31,7 +29,6 @@ interface State {
   inputValue: string;
   isRotated: boolean;
   filteredCountries: countriesObj[];
-  // loadingState: string;
 }
 
 type Action =
@@ -40,7 +37,6 @@ type Action =
   | { type: "SEARCH_COUNTRIES"; payload: string }
   | { type: "TOGGLE_ROTATE" }
   | { type: "FILTER_COUNTRIES"; payload: string };
-// | { type: "SET_LOADING_STATE"; payload: string };
 
 interface CountriesDataProviderProps {
   children: React.ReactNode;
@@ -53,7 +49,6 @@ const initialState = {
   filteredCountries: [],
   inputValue: "",
   isRotated: false,
-  // loadingState: "",
 };
 
 function reducer(state: State, action: Action) {
@@ -111,12 +106,6 @@ function reducer(state: State, action: Action) {
         inputValue: action.payload,
       };
 
-    // case "SET_LOADING_STATE":
-    //   return {
-    //     ...state,
-    //     loadingState: action.payload,
-    //   }
-
     default:
       return state;
   }
@@ -139,7 +128,7 @@ function CountriesDataProvider({ children }: CountriesDataProviderProps) {
       const sortedData = data.sort((a: countriesObj, b: countriesObj) =>
         a.name.common.localeCompare(b.name.common),
       );
-      console.log(sortedData);
+      // console.log(sortedData);
       dispatch({ type: "SET_COUNTRIES", payload: sortedData });
     }
     if (data) {
@@ -148,7 +137,6 @@ function CountriesDataProvider({ children }: CountriesDataProviderProps) {
   }, [data]);
 
   if (isPending) {
-    // dispatch({ type: "SET_LOADING_STATE", payload: "loading" });
     return <Spinner />;
   }
 
@@ -172,9 +160,6 @@ function CountriesDataProvider({ children }: CountriesDataProviderProps) {
     dispatch({ type: "FILTER_COUNTRIES", payload: region });
   }
 
-  // function setLoadingState(state: string) {
-  //   dispatch({ type: "SET_LOADING_STATE", payload: state });
-  // }
 
   return (
     <CountriesDataContext.Provider
