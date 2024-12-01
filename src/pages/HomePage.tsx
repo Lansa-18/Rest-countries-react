@@ -22,6 +22,7 @@ export default function HomePage() {
               <SearchBar />
               <FilterDropDown />
               <FilterDropDownList />
+              {/* <div className="relative"></div> */}
             </article>
             <article className="grid grid-cols-5 gap-x-8 gap-y-8 tab-land:grid-cols-4 tab-port:grid-cols-3 land-phone:grid-cols-2 custom-540:grid-cols-1">
               {filteredCountries.map((country) => (
