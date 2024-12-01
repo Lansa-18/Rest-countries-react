@@ -42,8 +42,8 @@ export default function DetailsPage() {
         <div className="mt-16 w-[90%]">
           <BackButton />
 
-          <section className="mt-16 flex gap-[10rem]">
-            <figure className="w-[40%] shadow-lg">
+          <section className="mt-16 flex gap-[10rem] tab-port:gap-[5rem] custom-850:flex-col">
+            <figure className="w-[40%] shadow-lg tab-port:w-[50%] custom-850:w-full">
               <img
                 className="h-full w-full object-cover"
                 src={newData?.flags?.svg}
@@ -51,11 +51,11 @@ export default function DetailsPage() {
               />
             </figure>
             <article
-              className={`${isDarkMode ? "text-dark-mode-text" : "text-light-mode-text"} flex w-[55%] flex-col gap-16 border-red-500`}
+              className={`${isDarkMode ? "text-dark-mode-text" : "text-light-mode-text"} flex w-[55%] flex-col gap-16 custom-850:w-full`}
             >
               <h2 className="text-4xl font-bold">{newData?.name?.common}</h2>
 
-              <div className="flex w-full justify-between">
+              <div className="flex w-full justify-between custom-850:flex-col custom-850:gap-[4rem]">
                 <div className="space-y-6">
                   <p className="text-2xl font-semibold">
                     Native Name:{" "}
@@ -129,7 +129,7 @@ export default function DetailsPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-8">
+              <div className="flex items-center gap-8 custom-850:w-full">
                 <h3 className="text-2xl font-semibold">Border Countries:</h3>
                 <div className="flex flex-wrap gap-4">
                   {newData.borders ? (
