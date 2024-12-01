@@ -1,15 +1,32 @@
-import { useTheme } from "./context/themeContext";
-import Header from "./ui/Header";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CountriesDataProvider } from "./context/CountriesDataContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import Spinner from "./components/Spinner";
+
+// Lazy loading the pages
+const HomePage = lazy(() => import("./pages/HomePage"));
+const DetailsPage = lazy(() => import("./pages/DetailsPage"));
+const queryClient = new QueryClient();
 
 function App() {
-  const { isDarkMode } = useTheme();
 
   return (
-    <div
-      className={`${isDarkMode ? "bg-dark-mode-bg" : "bg-light-mode-bg"} font-nunito-sans min-h-screen`}
-    >
-      <Header />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <CountriesDataProvider>
+        <ThemeProvider>
+          <BrowserRouter>
+            <Suspense fallback={<Spinner />}>
+              <Routes>
+                <Route index element={<HomePage />} />
+                <Route path="details/:id" element={<DetailsPage />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </ThemeProvider>
+      </CountriesDataProvider>
+    </QueryClientProvider>
   );
 }
 

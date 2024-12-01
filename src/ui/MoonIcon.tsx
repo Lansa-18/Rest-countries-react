@@ -1,10 +1,10 @@
-import { useTheme } from "../context/themeContext";
+import { useTheme } from "../context/ThemeContext";
 
 export default function MoonIcon() {
   const { isDarkMode } = useTheme();
 
   return (
-    <div className="w-[20%]">
+    <div className="w-[20%] land-phone:w-[18%]">
       <img
         src={
           isDarkMode
