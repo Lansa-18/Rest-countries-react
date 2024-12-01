@@ -1,16 +1,19 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import BackButton from "../ui/BackButton";
 import Header from "../ui/Header";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../components/Spinner";
+import { useCountriesData } from "../context/CountriesDataContext";
 
 export default function DetailsPage() {
   const { isDarkMode } = useTheme();
   const { id } = useParams();
+  const { countries } = useCountriesData();
+  const navigate = useNavigate();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["singleCountry"],
+    queryKey: [`singleCountry, ${id}`],
     queryFn: async () => {
       const response = await fetch(`https://restcountries.com/v3.1/name/${id}`);
       return await response.json();
@@ -18,6 +21,7 @@ export default function DetailsPage() {
   });
 
   const newData = data?.[0];
+  console.log(isPending);
 
   if (isPending) {
     return <Spinner />;
@@ -31,6 +35,12 @@ export default function DetailsPage() {
 
   function formatNumber(number: number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function findCountryName(countryCode: string) {
+    const country = countries.find((country) => country.cca3 === countryCode)
+      ?.name.common;
+    navigate(`/details/${country}`);
   }
 
   return (
@@ -135,6 +145,7 @@ export default function DetailsPage() {
                   {newData.borders ? (
                     newData.borders.map((border: string) => (
                       <button
+                        onClick={() => findCountryName(border)}
                         key={border}
                         className={`${isDarkMode ? "bg-dark-mode-elements" : "bg-light-mode-elements"} rounded-lg px-6 py-2 text-xl font-semibold shadow-lg`}
                       >

@@ -15,6 +15,7 @@ interface ContextProp {
 
 export interface countriesObj {
   area: number;
+  cca3: string;
   name: { common: string };
   flags: {
     png: string;
