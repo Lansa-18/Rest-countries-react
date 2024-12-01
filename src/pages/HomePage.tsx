@@ -18,15 +18,15 @@ export default function HomePage() {
         <Header />
         <section className="flex justify-center">
           <div className="w-[90%]">
-            <article className="relative my-16 flex items-center justify-between">
+            <article className="relative my-16 flex items-center justify-between custom-850:flex-col">
               <SearchBar />
               <FilterDropDown />
               <FilterDropDownList />
             </article>
-            <article className="tab-land:grid-cols-4 tab-port:grid-cols-3 land-phone:grid-cols-2 custom-540:grid-cols-1 grid grid-cols-5 gap-x-8 gap-y-8">
-                {filteredCountries.map((country) => (
-                  <CountryCard key={country.name.common} country={country} />
-                ))}
+            <article className="grid grid-cols-5 gap-x-8 gap-y-8 tab-land:grid-cols-4 tab-port:grid-cols-3 land-phone:grid-cols-2 custom-540:grid-cols-1">
+              {filteredCountries.map((country) => (
+                <CountryCard key={country.name.common} country={country} />
+              ))}
             </article>
           </div>
         </section>

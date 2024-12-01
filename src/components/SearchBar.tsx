@@ -5,17 +5,12 @@ import { IoSearch } from "react-icons/io5";
 
 export default function SearchBar() {
   const { isDarkMode } = useTheme();
-  const { inputValue, updateInput, searchCountries } = useCountriesData();
+  const { searchCountries } = useCountriesData();
   const [newInputValue, setNewInputValue] = useState("");
-
-  // function handleSearch() {
-  //   searchCountries(newInputValue);
-  //   // console.log(inputValue);
-  // }
 
   return (
     <div
-      className={`${isDarkMode ? "bg-dark-mode-elements" : "bg-light-mode-elements"} flex basis-[30%] items-center gap-5 rounded-lg p-[2rem]`}
+      className={`${isDarkMode ? "bg-dark-mode-elements" : "bg-light-mode-elements"} flex tab-port:basis-[35%] basis-[30%] items-center gap-5 rounded-lg p-[2rem] custom-850:w-full`}
     >
       <label htmlFor="search">
         <IoSearch

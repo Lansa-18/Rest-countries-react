@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import BackButton from "../ui/BackButton";
 import Header from "../ui/Header";
@@ -20,8 +20,7 @@ export default function DetailsPage() {
   const newData = data?.[0];
 
   if (isPending) {
-    // return <Spinner />;
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (error) {
